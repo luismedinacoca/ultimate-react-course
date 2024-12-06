@@ -1,3 +1,4 @@
+import React from "react";
 import PropsType from "prop-types";
 import "./index.css";
 
@@ -83,13 +84,18 @@ function Menu() {
   return (
     <main className="menu">
       <h2>Our menu</h2>
-
       {numPizzas > 0 ? (
-        <ul className="pizzas">
-          {pizzas.map((pizza) => (
-            <Pizza pizzaObj={pizza} key={pizza.name} />
-          ))}
-        </ul>
+        <React.Fragment key={Math.random()}>
+          <p>
+            Authentic Italian cuisine. 6 creative dishes to choose from. All
+            from our stone oven, all organic, all delicious.
+          </p>
+          <ul className="pizzas">
+            {pizzas.map((pizza) => (
+              <Pizza pizzaObj={pizza} key={pizza.name} />
+            ))}
+          </ul>
+        </React.Fragment>
       ) : (
         <p>We're still working on our menu. Please come back later 😆</p>
       )}
