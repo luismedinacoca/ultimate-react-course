@@ -93,71 +93,37 @@ function Menu() {
       ) : (
         <p>We're still working on our menu. Please come back later 😆</p>
       )}
-
-      {/* Translate to if statement */}
-
-      {/* {pizzas && (
-        <ul className="pizzas">
-          {pizzas.map((pizza) => (
-            <Pizza pizzaObj={pizza} key={pizza.name} />
-          ))}
-        </ul>
-      )} 
-       */}
-
-      {/*
-      <ul className="pizzas">
-        /* <Pizza
-          name="Pizza Spinaci"
-          ingredients="Tomato, mozarella, spinach, and ricotta cheese"
-          photoName="pizzas/spinaci.jpg"
-          price={15.25}
-        />
-        <Pizza
-          name="Pizza Funghi"
-          ingredients="Tomato, mushrooms"
-          photoName="pizzas/funghi.jpg"
-          price={10.75}
-        /> 
-         {pizzaData.map((pizza) => (
-          <Pizza name={pizza.name} photoName={pizza.photoName}/>
-        ))} 
-
-        {pizzaData.map((pizza) => (
-          <Pizza pizzaObj={pizza} key={pizza.name} />
-        ))}
-      </ul>*/}
     </main>
   );
 }
 
-function Pizza(props) {
-  // console.log(props);
+function Pizza({ pizzaObj }) {
+  console.log(pizzaObj);
   return (
-    // <div className="pizza">
-    //   <img src={props.photoName} alt={props.name} />
-    //   <div>
-    //     <h3 style={{ color: "green", fontSize: "24px" }}>{props.name}</h3>
-    //     <p>{props.ingredients}</p>
-    //     <span>$ {props.price}</span>
-    //   </div>
-    // </div>
     <li className="pizza">
-      <img src={props.pizzaObj.photoName} alt={props.pizzaObj.name} />
+      <img src={pizzaObj.photoName} alt={pizzaObj.name} />
       <div>
-        <h3 style={{ color: "green", fontSize: "24px" }}>
-          {props.pizzaObj.name}
-        </h3>
-        <p>{props.pizzaObj.ingredients}</p>
-        <span>$ {props.pizzaObj.price}</span>
+        <h3 style={{ color: "green", fontSize: "24px" }}>{pizzaObj.name}</h3>
+        <p>{pizzaObj.ingredients}</p>
+        <span>$ {pizzaObj.price}</span>
       </div>
     </li>
   );
 }
 
+Pizza.propTypes = {
+  pizzaObj: PropsType.shape({
+    name: PropsType.string.isRequired,
+    ingredients: PropsType.string.isRequired,
+    price: PropsType.number.isRequired,
+    photoName: PropsType.string.isRequired,
+    soldOut: PropsType.bool.isRequired,
+  }).isRequired,
+};
+
 function Footer() {
   const hour = new Date().getHours();
-  const openHour = 12;
+  const openHour = 8;
   const closeHour = 22;
   const isOpen = hour >= openHour && hour <= closeHour;
 
@@ -166,24 +132,31 @@ function Footer() {
   // console.log(hour);
   return (
     <footer className="footer">
-      {/* {new Date().toLocaleTimeString()} We are currently open */}
       {isOpen ? (
-        <Open closeHour={closeHour} />
+        <Open openHour={openHour} closeHour={closeHour} />
       ) : (
         <p>
-          We're happy to welcome you between {openHour}:00 and {closeHour}:00
+          We're happy to welcome you between {openHour} and {closeHour}
         </p>
       )}
     </footer>
   );
 }
 
-function Open(props) {
+function Open({ openHour, closeHour }) {
   return (
     <div className="order">
-      <p>{new Date().toLocaleTimeString()}</p>
       <p>
-        We are open until {props.closeHour}:00. Come visit us or order online.
+        {new Date().toLocaleTimeString("es-AR", {
+          hourCycle: "h23",
+          hour: "2-digit",
+          minute: "2-digit",
+        })}
+        h
+      </p>
+      <p>
+        We are open from {openHour}:00h until {closeHour}:00h. Come visit us or
+        order online.
       </p>
       <button className="btn">Order</button>
     </div>
@@ -195,6 +168,7 @@ PropsType.propTypes = {
 
 Open.propTypes = {
   closeHour: PropsType.number.isRequired,
+  openHour: PropsType.number.isRequired,
 };
 
 export default App;
