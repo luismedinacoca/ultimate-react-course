@@ -168,11 +168,7 @@ function Footer() {
     <footer className="footer">
       {/* {new Date().toLocaleTimeString()} We are currently open */}
       {isOpen ? (
-        <div className="order">
-          <p>{new Date().toLocaleTimeString()}</p>
-          <p>We're open until {closeHour}:00. Come visit us or order online.</p>
-          <button className="btn">Order</button>
-        </div>
+        <Open closeHour={closeHour} />
       ) : (
         <p>
           We're happy to welcome you between {openHour}:00 and {closeHour}:00
@@ -182,8 +178,23 @@ function Footer() {
   );
 }
 
+function Open(props) {
+  return (
+    <div className="order">
+      <p>{new Date().toLocaleTimeString()}</p>
+      <p>
+        We are open until {props.closeHour}:00. Come visit us or order online.
+      </p>
+      <button className="btn">Order</button>
+    </div>
+  );
+}
 PropsType.propTypes = {
   prop: PropsType.node,
+};
+
+Open.propTypes = {
+  closeHour: PropsType.number.isRequired,
 };
 
 export default App;
