@@ -93,55 +93,15 @@ function Menu() {
       ) : (
         <p>We're still working on our menu. Please come back later 😆</p>
       )}
-
-      {/* Translate to if statement */}
-
-      {/* {pizzas && (
-        <ul className="pizzas">
-          {pizzas.map((pizza) => (
-            <Pizza pizzaObj={pizza} key={pizza.name} />
-          ))}
-        </ul>
-      )} 
-       */}
-
-      {/*
-      <ul className="pizzas">
-        /* <Pizza
-          name="Pizza Spinaci"
-          ingredients="Tomato, mozarella, spinach, and ricotta cheese"
-          photoName="pizzas/spinaci.jpg"
-          price={15.25}
-        />
-        <Pizza
-          name="Pizza Funghi"
-          ingredients="Tomato, mushrooms"
-          photoName="pizzas/funghi.jpg"
-          price={10.75}
-        /> 
-         {pizzaData.map((pizza) => (
-          <Pizza name={pizza.name} photoName={pizza.photoName}/>
-        ))} 
-
-        {pizzaData.map((pizza) => (
-          <Pizza pizzaObj={pizza} key={pizza.name} />
-        ))}
-      </ul>*/}
     </main>
   );
 }
 
 function Pizza(props) {
-  // console.log(props);
+  console.log(props);
+
+  if (props.pizzaObj.soldOut) return null;
   return (
-    // <div className="pizza">
-    //   <img src={props.photoName} alt={props.name} />
-    //   <div>
-    //     <h3 style={{ color: "green", fontSize: "24px" }}>{props.name}</h3>
-    //     <p>{props.ingredients}</p>
-    //     <span>$ {props.price}</span>
-    //   </div>
-    // </div>
     <li className="pizza">
       <img src={props.pizzaObj.photoName} alt={props.pizzaObj.name} />
       <div>
@@ -161,12 +121,12 @@ function Footer() {
   const closeHour = 22;
   const isOpen = hour >= openHour && hour <= closeHour;
 
-  // if (hour >= openHour && hour <= closeHour) alert("We're currently open!");
-  // alert("Sorry we're closed!");
-  // console.log(hour);
+  if (!isOpen) return <p>We're closed</p>;
+  /*
+   there's not footer section!
+  */
   return (
     <footer className="footer">
-      {/* {new Date().toLocaleTimeString()} We are currently open */}
       {isOpen ? (
         <div className="order">
           <p>{new Date().toLocaleTimeString()}</p>
@@ -184,6 +144,16 @@ function Footer() {
 
 PropsType.propTypes = {
   prop: PropsType.node,
+};
+
+Pizza.propTypes = {
+  pizzaObj: PropsType.shape({
+    name: PropsType.string.isRequired,
+    ingredients: PropsType.string.isRequired,
+    price: PropsType.number.isRequired,
+    photoName: PropsType.string.isRequired,
+    soldOut: PropsType.bool.isRequired,
+  }).isRequired,
 };
 
 export default App;
