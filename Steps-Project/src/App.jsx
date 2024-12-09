@@ -6,6 +6,16 @@ const messages = [
 
 function App() {
   const step = 1;
+
+  //Event handler functons
+  function handlePrevious() {
+    alert("Previous");
+  }
+  function handleNext() {
+    alert("Next");
+  }
+
+  
   return (
     <div className="steps">
       <div className="numbers">
@@ -18,10 +28,19 @@ function App() {
         Step {step}: {messages[step - 1]}
       </p>
       <div className="buttons">
-        <button style={{ backgroundColor: "#7950F2", color: "#FFF" }}>
+        <button
+          style={{ backgroundColor: "#7950F2", color: "#FFF" }}
+          onClick={handlePrevious}
+          // onClick={() => alert("Previous")}
+          // onMouseEnter={() => alert("Previous")}
+        >
           Previous
         </button>
-        <button style={{ backgroundColor: "#7950F2", color: "#FFF" }}>
+        <button
+          style={{ backgroundColor: "#7950F2", color: "#FFF" }}
+          // onClick={() => alert("Next")}
+          onClick={handleNext}
+        >
           Next
         </button>
       </div>
