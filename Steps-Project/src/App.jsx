@@ -7,7 +7,11 @@ const messages = [
 ];
 
 function App() {
+  // if(step > 0) {
+  //   const [step, setStep] = useState(1);  //! useState must not be inside conditional expression!
+  // }
   const [step, setStep] = useState(1);
+  // let [step, setStep] = useState(1);
 
   //Event handler functons
   function handlePrevious() {
@@ -15,6 +19,8 @@ function App() {
   }
   function handleNext() {
     if (step < 3) setStep((s) => s + 1);
+    // step = step + 1;
+    // console.log("step: ", step);
   }
 
   return (
