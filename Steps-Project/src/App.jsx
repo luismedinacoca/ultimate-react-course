@@ -12,6 +12,7 @@ function App() {
   // }
   const [step, setStep] = useState(1);
   // let [step, setStep] = useState(1);
+  const [test, setTest] = useState({ name: "Luiggie" });
 
   //Event handler functons
   function handlePrevious() {
@@ -21,9 +22,12 @@ function App() {
     if (step < 3) setStep((s) => s + 1);
     // step = step + 1;
     // console.log("step: ", step);
+
+    //BAD PRACTICE:
+    // test.name="Luis Medina Coca"
+    setTest({ name: "Luis Medina" });
   }
 
-  return (
     <div className="steps">
       <div className="numbers">
         <div className={step >= 1 ? "active" : ""}>1</div>
@@ -33,6 +37,7 @@ function App() {
 
       <p className="message">
         Step {step}: {messages[step - 1]}
+        <span>{test.name}</span>
       </p>
       <div className="buttons">
         <button
