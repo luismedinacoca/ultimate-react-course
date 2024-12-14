@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import { useState } from "react";
 
 const initialItems = [
   { id: 1, description: "Passports", quantity: 2, packed: true },
@@ -23,29 +24,40 @@ const Logo = () => {
 };
 
 const Form = () => {
+  //input field:
+  const [description, setDescription] = useState(""); //attempt to add some value inside useState then go to webpage
+  const [qty, setQty] = useState(1);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Submit button has been clicked");
-    console.log(e);
+    //! avoid create an item without description:
+    if (!description) return;
+
+    //TODO create a new item
+    const newItem = { description, qty, packed: false, id: Date.now() };
+    console.log(newItem);
+
+    //! reset those fields: qty and item description:
+    setDescription("");
+    setQty(1);
   };
 
   return (
     <form className="add-form" onSubmit={handleSubmit}>
       <h3>What do you need for your 🥰 trip?</h3>
-      <select>
-        {/* 
-        <option value={1}>1</option>
-        <option value={2}>2</option>
-        ...
-        <option value={20}>20</option>
-        */}
+      <select value={qty} onChange={(e) => setQty(Number(e.target.value))}>
         {Array.from({ length: 20 }, (_, i) => i + 1).map((num) => (
           <option value={num} key={num}>
             {num}
           </option>
         ))}
       </select>
-      <input type="text" placeholder="Item..." />
+      <input
+        type="text"
+        placeholder="Item..."
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
+      />
       <button>Add</button>
     </form>
   );
