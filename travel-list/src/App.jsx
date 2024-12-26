@@ -1,32 +1,47 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
 
-const initialItems = [
-  { id: 1, description: "Passports", quantity: 2, packed: true },
-  { id: 2, description: "Socks", quantity: 12, packed: false },
-  { id: 3, description: "charger", quantity: 1, packed: true },
-  { id: 4, description: "Socks", quantity: 12, packed: false },
-];
+// const initialItems = [
+//   { id: 1, description: "Passports", quantity: 2, packed: true },
+//   { id: 2, description: "Socks", quantity: 12, packed: false },
+//   { id: 3, description: "charger", quantity: 1, packed: true },
+//   { id: 4, description: "shorts", quantity: 2, packed: false },
+// ];
 
+//************** APP component  **************/
 const App = () => {
+  const [items, setItems] = useState([]);
+
+  const handleAddItems = (item) => {
+    setItems((items) => [...items, item]);
+  };
+
   return (
     <div className="app">
       <Logo />
-      <Form />
-      <PackingList />
+      <Form onAddItems={handleAddItems} />
+      <PackingList items={items} />
       <Stats />
     </div>
   );
 };
 
+//************** LOGO component  **************/
 const Logo = () => {
   return <h1>🌴 Far Away 🧳</h1>;
 };
 
-const Form = () => {
+//************** FORM component  **************/
+const Form = ({ onAddItems }) => {
   //input field:
   const [description, setDescription] = useState(""); //attempt to add some value inside useState then go to webpage
   const [qty, setQty] = useState(1);
+  //adding new item as state => review lecture from 71 to 73 before continuing!
+  // const [items, setItems] = useState([]); // => that should be moved to 1st Form & PackingList's parent component
+
+  // const handleAddItems = (item) => {
+  //   setItems((items) => [...items, item]);
+  // };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -36,6 +51,9 @@ const Form = () => {
     //TODO create a new item
     const newItem = { description, qty, packed: false, id: Date.now() };
     console.log(newItem);
+
+    //handleAddItems(newItem);
+    onAddItems(newItem);
 
     //! reset those fields: qty and item description:
     setDescription("");
@@ -63,11 +81,12 @@ const Form = () => {
   );
 };
 
-const PackingList = () => {
+//************** PACKINGLIST component  **************/
+const PackingList = ({ items }) => {
   return (
     <div className="list">
       <ul>
-        {initialItems.map((item) => (
+        {items.map((item) => (
           <Item key={item.id} item={item} />
         ))}
       </ul>
@@ -75,6 +94,7 @@ const PackingList = () => {
   );
 };
 
+//************** ITEM component  **************/
 const Item = ({ item }) => {
   return (
     <li>
@@ -86,6 +106,7 @@ const Item = ({ item }) => {
   );
 };
 
+//************** STATS component  **************/
 const Stats = () => {
   return (
     <footer className="stats">
@@ -104,4 +125,19 @@ Item.propTypes = {
     quantity: PropTypes.number.isRequired,
     packed: PropTypes.bool.isRequired,
   }).isRequired,
+};
+
+PackingList.propTypes = {
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      description: PropTypes.string.isRequired,
+      quantity: PropTypes.number.isRequired,
+      packed: PropTypes.bool.isRequired,
+    })
+  ).isRequired,
+};
+
+Form.propTypes = {
+  onAddItems: PropTypes.func.isRequired,
 };
