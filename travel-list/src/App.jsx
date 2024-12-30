@@ -1,13 +1,6 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
 
-// const initialItems = [
-//   { id: 1, description: "Passports", quantity: 2, packed: true },
-//   { id: 2, description: "Socks", quantity: 12, packed: false },
-//   { id: 3, description: "charger", quantity: 1, packed: true },
-//   { id: 4, description: "shorts", quantity: 2, packed: true },
-// ];
-
 //************** APP component  **************/
 const App = () => {
   const [items, setItems] = useState([]);
@@ -21,11 +14,23 @@ const App = () => {
     setItems((items) => [...items, item]);
   };
 
+  const handleToggleItem = (id) => {
+    setItems((items) =>
+      items.map((item) =>
+        item.id === id ? { ...item, packed: !item.packed } : item
+      )
+    );
+  };
+
   return (
     <div className="app">
       <Logo />
       <Form onAddItems={handleAddItems} />
-      <PackingList items={items} onDeleteItem={handleDeleteItem} />
+      <PackingList
+        items={items}
+        onDeleteItem={handleDeleteItem}
+        onToggleItem={handleToggleItem}
+      />
       <Stats />
     </div>
   );
@@ -87,12 +92,17 @@ const Form = ({ onAddItems }) => {
 };
 
 //************** PACKINGLIST component  **************/
-const PackingList = ({ items, onDeleteItem }) => {
+const PackingList = ({ items, onDeleteItem, onToggleItem }) => {
   return (
     <div className="list">
       <ul>
         {items.map((item) => (
-          <Item key={item.id} item={item} onDeleteItem={onDeleteItem} />
+          <Item
+            key={item.id}
+            item={item}
+            onDeleteItem={onDeleteItem}
+            onToggleItem={onToggleItem}
+          />
         ))}
       </ul>
     </div>
@@ -100,9 +110,14 @@ const PackingList = ({ items, onDeleteItem }) => {
 };
 
 //************** ITEM component  **************/
-const Item = ({ item, onDeleteItem }) => {
+const Item = ({ item, onDeleteItem, onToggleItem }) => {
   return (
     <li>
+      <input
+        type="checkbox"
+        value={item.packed}
+        onChange={() => onToggleItem(item.id)}
+      />
       <span style={item.packed ? { textDecoration: "line-through" } : {}}>
         {item.quantity} {item.description}
       </span>
@@ -120,9 +135,7 @@ const Stats = () => {
   );
 };
 
-export default App;
-
-// Props Validation:
+//************** PROPS validation **************/
 Item.propTypes = {
   item: PropTypes.shape({
     id: PropTypes.number.isRequired,
@@ -130,6 +143,8 @@ Item.propTypes = {
     quantity: PropTypes.number.isRequired,
     packed: PropTypes.bool.isRequired,
   }).isRequired,
+  onDeleteItem: PropTypes.func.isRequired,
+  onToggleItem: PropTypes.func.isRequired,
 };
 
 PackingList.propTypes = {
@@ -141,8 +156,12 @@ PackingList.propTypes = {
       packed: PropTypes.bool.isRequired,
     })
   ).isRequired,
+  onDeleteItem: PropTypes.func.isRequired,
+  onToggleItem: PropTypes.func.isRequired,
 };
 
 Form.propTypes = {
   onAddItems: PropTypes.func.isRequired,
 };
+
+export default App;
