@@ -4,14 +4,23 @@ import { useState } from "react";
 //************** APP component  **************/
 const App = () => {
   const [items, setItems] = useState([]);
+  /*
+  ! Avoid having a new state for item numbers:
+  const [numItems, setNumItems] = useState(0)
+  */
 
   function handleDeleteItem(id) {
     // console.log(id);
     setItems((items) => items.filter((item) => item.id !== id));
+    /* 
+    ! avoir having a new state for item numbers:
+    setNumItems( (num) => num + 1)
+    */
   }
 
   const handleAddItems = (item) => {
     setItems((items) => [...items, item]);
+    console.log(item);
   };
 
   const handleToggleItem = (id) => {
@@ -31,7 +40,10 @@ const App = () => {
         onDeleteItem={handleDeleteItem}
         onToggleItem={handleToggleItem}
       />
-      <Stats />
+      {/*
+      ! sending the items to stats: 
+      */}
+      <Stats items={items} />
     </div>
   );
 };
@@ -45,7 +57,7 @@ const Logo = () => {
 const Form = ({ onAddItems }) => {
   //input field:
   const [description, setDescription] = useState(""); //attempt to add some value inside useState then go to webpage
-  const [qty, setQty] = useState(1);
+  const [quantity, setQuantity] = useState(1);
   //adding new item as state => review lecture from 71 to 73 before continuing!
   // const [items, setItems] = useState([]); // => that should be moved to 1st Form & PackingList's parent component
 
@@ -59,7 +71,7 @@ const Form = ({ onAddItems }) => {
     if (!description) return;
 
     //TODO create a new item
-    const newItem = { description, qty, packed: false, id: Date.now() };
+    const newItem = { description, quantity, packed: false, id: Date.now() };
     // console.log(newItem);
 
     //handleAddItems(newItem);
@@ -67,13 +79,16 @@ const Form = ({ onAddItems }) => {
 
     //! reset those fields: qty and item description:
     setDescription("");
-    setQty(1);
+    setQuantity(1);
   };
 
   return (
     <form className="add-form" onSubmit={handleSubmit}>
       <h3>What do you need for your 🥰 trip?</h3>
-      <select value={qty} onChange={(e) => setQty(Number(e.target.value))}>
+      <select
+        value={quantity}
+        onChange={(e) => setQuantity(Number(e.target.value))}
+      >
         {Array.from({ length: 20 }, (_, i) => i + 1).map((num) => (
           <option value={num} key={num}>
             {num}
@@ -127,10 +142,26 @@ const Item = ({ item, onDeleteItem, onToggleItem }) => {
 };
 
 //************** STATS component  **************/
-const Stats = () => {
+const Stats = ({ items }) => {
+  // ! When items.length = 0;
+  if (!items.length)
+    return (
+      <p className="stats">
+        <em>Start adding some items to your packing list 🚀</em>
+      </p>
+    );
+
+  const numItems = items.length;
+  const numPacked = items.filter((item) => item.packed).length;
+  const percentage = Math.round((numPacked / numItems) * 100);
+
   return (
     <footer className="stats">
-      <em>💼 You have X itemson your list, and you already packed X (X%)</em>
+      <em>
+        {percentage === 100
+          ? "You got everything Ready to go ✈️"
+          : `💼 You have ${numItems} items on your list, and you already packed ${numPacked} (${percentage}%)`}
+      </em>
     </footer>
   );
 };
@@ -162,6 +193,17 @@ PackingList.propTypes = {
 
 Form.propTypes = {
   onAddItems: PropTypes.func.isRequired,
+};
+
+Stats.propTypes = {
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      description: PropTypes.string.isRequired,
+      quantity: PropTypes.number.isRequired,
+      packed: PropTypes.bool.isRequired,
+    })
+  ).isRequired,
 };
 
 export default App;
