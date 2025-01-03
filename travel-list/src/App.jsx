@@ -31,6 +31,14 @@ const App = () => {
     );
   };
 
+  function handleClearList() {
+    //setItems([]);
+    const confirmed = window.confirm(
+      "Are you sure you want to delete all items?"
+    );
+    if (confirmed) setItems([]);
+  }
+
   return (
     <div className="app">
       <Logo />
@@ -39,6 +47,7 @@ const App = () => {
         items={items}
         onDeleteItem={handleDeleteItem}
         onToggleItem={handleToggleItem}
+        onClearList={handleClearList}
       />
       {/*
       ! sending the items to stats: 
@@ -107,7 +116,7 @@ const Form = ({ onAddItems }) => {
 };
 
 //************** PACKINGLIST component  **************/
-const PackingList = ({ items, onDeleteItem, onToggleItem }) => {
+const PackingList = ({ items, onDeleteItem, onToggleItem, onClearList }) => {
   const [sortBy, setSortBy] = useState("input");
 
   let sortedItems;
@@ -140,6 +149,7 @@ const PackingList = ({ items, onDeleteItem, onToggleItem }) => {
           <option value="description">Sort by description</option>
           <option value="packed">Sort by packed status</option>
         </select>
+        <button onClick={onClearList}>Clear list</button>
       </div>
     </div>
   );
@@ -210,6 +220,7 @@ PackingList.propTypes = {
   ).isRequired,
   onDeleteItem: PropTypes.func.isRequired,
   onToggleItem: PropTypes.func.isRequired,
+  onClearList: PropTypes.func.isRequired,
 };
 
 Form.propTypes = {
