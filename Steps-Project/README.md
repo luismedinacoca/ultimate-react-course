@@ -1,8 +1,45 @@
 # React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+since this array:
 
-Currently, two official plugins are available:
+```javascript
+const messages = [
+  "Learn React ⚛️",
+  "Apply for jobs 💼",
+  "Invest your new income 🤑",
+];
+```
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Replace this code
+
+```Javascript
+<p className="message">
+    Step {step}: {messages[step - 1]}
+</p>
+```
+
+with this code
+
+```javascript
+<StepMessage step={step}>{messages[step - 1]}</StepMessage>
+```
+
+which the component code is:
+
+```javascript
+import PropTypes from "prop-types";
+
+function StepMessage({ step, children }) {
+  return (
+    <p className="message">
+      <h3>Step {step}:</h3>
+      {children}
+    </p>
+  );
+}
+
+StepMessage.propTypes = {
+  step: PropTypes.number.isRequired,
+  children: PropTypes.node.isRequired,
+};
+```

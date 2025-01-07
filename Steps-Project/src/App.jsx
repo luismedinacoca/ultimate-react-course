@@ -12,6 +12,15 @@ function App() {
     <div>
       <Steps />
       {/* <Steps /> */}
+      {/* Passing StepMessage componenet */}
+      <StepMessage step={1}>
+        <p>Pass in content</p>
+        <p>✌️</p>
+      </StepMessage>
+      <StepMessage step={2}>
+        <p>Read children prop</p>
+        <p>🤩</p>
+      </StepMessage>
     </div>
   );
 }
@@ -44,9 +53,24 @@ function Steps() {
             <div className={step >= 3 ? "active" : ""}>3</div>
           </div>
 
+          {/* //replaced by <StepMessage/> component
           <p className="message">
             Step {step}: {messages[step - 1]}
-          </p>
+          </p> 
+          */}
+          <StepMessage step={step}>
+            {messages[step - 1]}
+            <div className="buttons">
+              <Button
+                bgColor="#e7e7e7"
+                textColor="#333"
+                onClick={() => alert(`Learn how to ${messages[step - 1]}`)}
+              >
+                Learn how
+              </Button>
+            </div>
+          </StepMessage>
+
           <div className="buttons">
             <Button bgColor="#7950F2" textColor="#FFF" onClick={handlePrevious}>
               <span>👈</span> Previous
@@ -70,6 +94,15 @@ function Steps() {
         </div>
       )}
     </div>
+  );
+}
+
+function StepMessage({ step, children }) {
+  return (
+    <p className="message">
+      <h3>Step {step}:</h3>
+      {children}
+    </p>
   );
 }
 
@@ -99,5 +132,10 @@ Button.propTypes = {
   bgColor: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
   text: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
+};
+
+StepMessage.propTypes = {
+  step: PropTypes.number.isRequired,
   children: PropTypes.node.isRequired,
 };
