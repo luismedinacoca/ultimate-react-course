@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import { useState } from "react";
 
 const messages = [
@@ -11,7 +10,7 @@ function App() {
   return (
     <div>
       <Steps />
-      {/* <Steps /> */}
+      <Steps />
     </div>
   );
 }
@@ -48,24 +47,18 @@ function Steps() {
             Step {step}: {messages[step - 1]}
           </p>
           <div className="buttons">
-            <Button bgColor="#7950F2" textColor="#FFF" onClick={handlePrevious}>
-              <span>👈</span> Previous
-            </Button>
-            {/* <button
+            <button
               style={{ backgroundColor: "#7950F2", color: "#FFF" }}
               onClick={handlePrevious}
             >
               Previous
-            </button> */}
-            <Button bgColor="#7950F2" textColor="#FFF" onClick={handleNext}>
-              Next <span>👉</span>
-            </Button>
-            {/* <button
-                style={{ backgroundColor: "#7950F2", color: "#FFF" }}
-                onClick={handleNext}
-              >
-                Next
-              </button> */}
+            </button>
+            <button
+              style={{ backgroundColor: "#7950F2", color: "#FFF" }}
+              onClick={handleNext}
+            >
+              Next
+            </button>
           </div>
         </div>
       )}
@@ -73,31 +66,4 @@ function Steps() {
   );
 }
 
-function Button({ textColor, bgColor, onClick, children }) {
-  return (
-    // <button
-    //   style={{ backgroundColor: "#7950F2", color: "#FFF" }}
-    //   onClick={handlePrevious}
-    // >
-    //   Text
-    // </button>
-
-    <button
-      style={{ backgroundColor: bgColor, color: textColor }}
-      onClick={onClick}
-    >
-      {children}
-    </button>
-  );
-}
-
 export default App;
-
-/*********** PROPS ***********/
-Button.propTypes = {
-  textColor: PropTypes.string.isRequired,
-  bgColor: PropTypes.string.isRequired,
-  onClick: PropTypes.func.isRequired,
-  text: PropTypes.string.isRequired,
-  children: PropTypes.node.isRequired,
-};
