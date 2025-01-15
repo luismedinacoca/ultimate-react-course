@@ -1,5 +1,4 @@
-import { useState } from 'react'
-
+import PropTypes from "prop-types";
 
 const initialFriends = [
   {
@@ -23,12 +22,61 @@ const initialFriends = [
 ];
 
 function App() {
-
   return (
     <>
-      
+      <div className="app">
+        <div className="sidebar">
+          <FriendList />
+        </div>
+      </div>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
+
+function FriendList() {
+  const friends = initialFriends;
+  return (
+    <ul>
+      {friends.map((friend) => (
+        <Friend friend={friend} key={friend.id} />
+      ))}
+    </ul>
+  );
+}
+
+function Friend({ friend }) {
+  return (
+    <li>
+      <img src={friend.image} alt={friend.name} />
+      <h3>{friend.name}</h3>
+
+      {friend.balance < 0 && (
+        <p className="red">
+          You owe {friend.name} US${Math.abs(friend.balance)}
+        </p>
+      )}
+
+      {friend.balance > 0 && (
+        <p className="green">
+          {friend.name} owes you US${Math.abs(friend.balance)}
+        </p>
+      )}
+
+      {friend.balance === 0 && <p>You and {friend.name} are even</p>}
+
+      <button className="button">Select</button>
+    </li>
+  );
+}
+
+//*************** Props: ***************//
+Friend.propTypes = {
+  friend: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    image: PropTypes.string.isRequired,
+    balance: PropTypes.number.isRequired,
+  }).isRequired,
+};
