@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import { useState } from "react";
 
 const initialFriends = [
   {
@@ -21,14 +22,31 @@ const initialFriends = [
   },
 ];
 
+function Button({ children, onClick }) {
+  return (
+    <button className="button" onClick={onClick}>
+      {children}
+    </button>
+  );
+}
+
 function App() {
+  const [showAddFriend, setShowAddFriend] = useState(true);
+
+  const handleShowAddFriend = () => {
+    setShowAddFriend((show) => !show);
+  };
+
   return (
     <>
       <div className="app">
         <div className="sidebar">
           <FriendList />
-          <FormAddFriend />
-          <Button>Add friend</Button>
+          {showAddFriend && <FormAddFriend />}
+          <Button onClick={handleShowAddFriend}>
+            {" "}
+            {showAddFriend ? "Close" : "Add Friend"}
+          </Button>
         </div>
         <FormSplitBill />
       </div>
@@ -72,10 +90,6 @@ function Friend({ friend }) {
       <Button>Select</Button>
     </li>
   );
-}
-
-function Button({ children }) {
-  return <button className="button">{children}</button>;
 }
 
 function FormAddFriend() {
@@ -129,4 +143,5 @@ Friend.propTypes = {
 
 Button.propTypes = {
   children: PropTypes.node.isRequired,
+  onClick: PropTypes.func.isRequired,
 };
