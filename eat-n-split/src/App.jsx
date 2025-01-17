@@ -32,19 +32,24 @@ function Button({ children, onClick }) {
 
 function App() {
   const [showAddFriend, setShowAddFriend] = useState(true);
+  const [friends, setFriends] = useState(initialFriends);
 
   const handleShowAddFriend = () => {
     setShowAddFriend((show) => !show);
+  };
+
+  const handleAddFriend = (friend) => {
+    setFriends((friends) => [...friends, friend]);
+    setShowAddFriend(false);
   };
 
   return (
     <>
       <div className="app">
         <div className="sidebar">
-          <FriendList />
-          {showAddFriend && <FormAddFriend />}
+          <FriendList friends={friends} />
+          {showAddFriend && <FormAddFriend onAddFriend={handleAddFriend} />}
           <Button onClick={handleShowAddFriend}>
-            {" "}
             {showAddFriend ? "Close" : "Add Friend"}
           </Button>
         </div>
@@ -56,8 +61,9 @@ function App() {
 
 export default App;
 
-function FriendList() {
-  const friends = initialFriends;
+function FriendList({ friends }) {
+  //! comment out this initialFriends due to upgrade leveling up into App component (create a new Friend: FormAddFriend component)
+  //const friends = initialFriends;
   return (
     <ul>
       {friends.map((friend) => (
@@ -92,14 +98,47 @@ function Friend({ friend }) {
   );
 }
 
-function FormAddFriend() {
+function FormAddFriend({ onAddFriend }) {
+  const [name, setName] = useState("");
+  const [image, setImage] = useState("https://i.pravatar.cc/48");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    //avoid submit with any value:
+    if (!name || !image) return;
+
+    const id = crypto.randomUUID();
+    //create a new friend object
+    const newFriend = {
+      id,
+      name,
+      image: `${image}?u=${id}`,
+      balance: 0,
+    };
+
+    //console.log(newFriend);
+    onAddFriend(newFriend);
+
+    setName("");
+    setImage("https://i.pravatar.cc/48");
+  };
+
   return (
-    <form className="form-add-friend">
+    <form className="form-add-friend" onSubmit={handleSubmit}>
       <label>👫 Friend name</label>
-      <input type="text" />
+      <input
+        type="text"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+      />
 
       <label>🌄 Image URL</label>
-      <input type="text" />
+      <input
+        type="text"
+        value={image}
+        onChange={(e) => setImage(e.target.value)}
+      />
 
       <Button>Add</Button>
     </form>
@@ -132,6 +171,17 @@ function FormSplitBill() {
 }
 
 //*************** Props: ***************//
+FriendList.propTypes = {
+  friends: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+      image: PropTypes.string.isRequired,
+      balance: PropTypes.number.isRequired,
+    })
+  ).isRequired,
+};
+
 Friend.propTypes = {
   friend: PropTypes.shape({
     id: PropTypes.number.isRequired,
@@ -139,6 +189,10 @@ Friend.propTypes = {
     image: PropTypes.string.isRequired,
     balance: PropTypes.number.isRequired,
   }).isRequired,
+};
+
+FormAddFriend.propTypes = {
+  onAddFriend: PropTypes.func.isRequired,
 };
 
 Button.propTypes = {
