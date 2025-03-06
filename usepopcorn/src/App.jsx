@@ -126,7 +126,7 @@ const Main = ({ children }) => {
  *
  */
 
-function Box({ children }) {
+function Box({ element }) {
   const [isOpen, setIsOpen] = useState(true);
   return (
     <div className="box">
@@ -137,7 +137,7 @@ function Box({ children }) {
       >
         {isOpen ? "–" : "+"}
       </button>
-      {isOpen && children}
+      {isOpen && element}
     </div>
   );
 }
