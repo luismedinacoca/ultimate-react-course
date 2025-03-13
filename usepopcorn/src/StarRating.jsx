@@ -1,4 +1,5 @@
 import { useState } from "react";
+// import PropTypes from "prop-types";
 
 const containerStyle = {
   display: "flex",
@@ -9,11 +10,6 @@ const containerStyle = {
 const starContainerStyle = {
   display: "flex",
 };
-
-// const textStyle = {
-//   lineHeight: "1",
-//   margin: "0",
-// };
 
 const StarRating = ({
   maxRating = 5,
@@ -63,7 +59,10 @@ const StarRating = ({
   );
 };
 
-export default StarRating;
+// const textStyle = {
+//   lineHeight: "1",
+//   margin: "0",
+// };
 
 // const starStyle = {
 //   width: "48px",
@@ -152,3 +151,25 @@ EMPTY STAR
 </svg>
 
 */
+
+export default StarRating;
+
+// StarRating.propTypes = {
+//   maxRating: PropTypes.number.isRequired,
+//   defaultRating: PropTypes.number,
+//   color: PropTypes.string,
+//   size: PropTypes.number,
+//   messages: PropTypes.array,
+//   onSetRating: PropTypes.func,
+//   className: PropTypes.string,
+// };
+
+/**
+ *   maxRating = 5,
+  color = "#fcc419",
+  size = 48,
+  messages = [],
+  defaultRating = 0,
+  onSetRating,
+ * 
+ */
