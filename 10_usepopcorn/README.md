@@ -1,12 +1,42 @@
-# React + Vite
+# The Ultimate React Course 2023: React, Redux & More
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[EduITFree](https://eduitfree.xyz/course/the-ultimate-react-course-2023-react-redux-more)
 
-Currently, two official plugins are available:
+# Installing Prop-Types:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+```js
+$ npm install prop-types
+```
 
-## Expanding the ESLint configuration
+# Section 12 - Lecture 142:
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Go to [OMDb API | The Open Movie Database](https://omdbapi.com/)
+
+Get the API_KEY:
+
+1. Click on `API Key` tab, next to `Change Log`. Now you get to URL: [API Key](https://omdbapi.com/apikey.aspx).
+2. In Generate API Key and Account Type, click on `FREE(1,000 daily limit)` radio button.
+3. Fill or complete the form:
+   1. Email
+   2. Name
+      - First Name
+      - Last Name
+   3. Use
+4. Click on `OMDb API` on the left top side in order to go back the previous page.
+5. Scroll to `Usage` then copy the URL in Send all data request to:
+
+   > http://www.omdbapi.com/?apikey=[yourkey]&
+
+6. Add in App component as:
+
+   > const KEY = 'f84fc31d';
+
+   ```js
+   fetch(`http://www.omdbapi.com/?apikey=[KEY]&`)
+     .then((res) => res.json())
+     .then((data) => console.log(data));
+   ```
+
+7. Searching for a specific movie
+
+   > http://www.omdbapi.com/?apikey=[yourkey]&s[MOVIE_NAME]

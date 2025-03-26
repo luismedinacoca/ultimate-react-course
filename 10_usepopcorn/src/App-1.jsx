@@ -18,26 +18,9 @@ import WatchedMoviesList from "./components/WatchedMoviesList/WatchedMoviesList"
 
 //import StarRating from "./components/StarRating/StarRating";
 
-const KEY = "f84fc31d";
-
 export default function App() {
-  // const [movies, setMovies] = useState(tempMovieData);
-  // const [watched, setWatched] = useState(tempWatchedData);
-  const [movies, setMovies] = useState([]);
-  const [watched, setWatched] = useState([]);
-
-  //fetch(`http://www.omdbapi.com/?apikey=${KEY}&s=Adolescence`)
-  fetch(`http://www.omdbapi.com/?apikey=${KEY}&s=Interstellar}`)
-    .then((res) => res.json())
-    .then((data) => {
-      // console.log(data);
-      // console.log(data.Response);
-      // console.log(data.totalResults);
-      console.log(data.Search);
-      //setMovies(data.Search); // ❌ Re-renders in a endless loop.
-      //setWatched([]);
-    });
-
+  const [movies, setMovies] = useState(tempMovieData);
+  const [watched, setWatched] = useState(tempWatchedData);
   return (
     <>
       <Navbar>
