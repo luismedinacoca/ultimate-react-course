@@ -26,29 +26,24 @@ export default function App() {
   const [movies, setMovies] = useState([]);
   const [watched, setWatched] = useState([]);
   const query = "adolescence";
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     // async function which has the await keyword.
     async function fetchMovies() {
+      setIsLoading(true);
       const res = await fetch(
         `http://www.omdbapi.com/?apikey=${KEY}&s=${query}}`
       );
       const data = await res.json();
       setMovies(data.Search);
-      console.log("movies: ", movies);
-      console.log("data.Search: ", data.Search);
+      // console.log("movies: ", movies);
+      // console.log("data.Search: ", data.Search);
+      setIsLoading(false);
     }
 
-    //calling the fetchMovies function
     fetchMovies();
   }, []);
-
-  /* 
-    ❌ useEffect() hook never is async.
-    
-    useEffect( async () => {
-      await fetch(`URL`)})
-  */
 
   return (
     <>
@@ -58,9 +53,7 @@ export default function App() {
       </Navbar>
 
       <Main>
-        <Box>
-          <MovieList movies={movies} />
-        </Box>
+        <Box>{isLoading ? <Loader /> : <MovieList movies={movies} />}</Box>
 
         <Box>
           <WatchedSummary watched={watched} />
@@ -69,4 +62,8 @@ export default function App() {
       </Main>
     </>
   );
+}
+
+function Loader() {
+  return <p className="loader">LOADING ....</p>;
 }
