@@ -8,7 +8,6 @@ import Test from "./components/Test/Test.jsx";
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <App />
-    <br />
     {/* <StarRating maxRating={6} />
     <StarRating />
     <StarRating size={34} color="red" className="test" />
