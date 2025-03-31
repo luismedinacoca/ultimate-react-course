@@ -11,7 +11,6 @@ const Box = ({ children }) => {
       >
         {isOpen ? "–" : "+"}
       </button>
-      {/* children with curly braces => it's an object */}
       {isOpen && children}
     </div>
   );
