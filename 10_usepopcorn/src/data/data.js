@@ -44,3 +44,7 @@ export const tempWatchedData = [
     userRating: 9,
   },
 ];
+
+export const key_imdb = {
+  KEY: "f84fc31d",
+};

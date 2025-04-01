@@ -8,12 +8,14 @@ import NumResult from "./components/NumResult/NumResult";
 import MovieList from "./components/MovieList/MovieList";
 
 import Box from "./components/Box/Box";
+import Loader from "./components/Loader/Loader";
 
 import WatchedSummary from "./components/WatchedSummary/WatchedSummary";
 import WatchedMoviesList from "./components/WatchedMoviesList/WatchedMoviesList";
 import MovieDetails from "./components/MovieDetails/MovieDetails";
+import { key_imdb } from "./data/data";
 
-const KEY = "f84fc31d";
+//const KEY = "f84fc31d";
 // const KEY = "40abff28";
 
 export default function App() {
@@ -22,7 +24,7 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [query, setQuery] = useState("");
-  const [selectedId, setSelectedId] = useState("tt0088763");
+  const [selectedId, setSelectedId] = useState(null);
   //const tempQuery = "adolescence";
   /*
   useEffect(() => {
@@ -57,7 +59,7 @@ export default function App() {
         setIsLoading(true);
         setError("");
         const res = await fetch(
-          `http://www.omdbapi.com/?apikey=${KEY}&s=${query}`
+          `http://www.omdbapi.com/?apikey=${key_imdb.KEY}&s=${query}`
         );
         const data = await res.json();
 
@@ -77,7 +79,7 @@ export default function App() {
         setMovies(data.Search);
         //console.log(data.Search);
       } catch (err) {
-        console.log(err.message);
+        //console.log(err.message);
         setError(err.message);
       } finally {
         setIsLoading(false);
@@ -121,9 +123,9 @@ export default function App() {
   );
 }
 
-function Loader() {
-  return <p className="loader">LOADING ....</p>;
-}
+// function Loader() {
+//   return <p className="loader">LOADING ....</p>;
+// }
 
 function ErrorMessage({ message }) {
   return (
