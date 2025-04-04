@@ -61,13 +61,15 @@ export default function App() {
   };
 
   useEffect(() => {
+    const controller = new AbortController();
     // async function which has the await keyword.
     async function fetchMovies() {
       try {
         setIsLoading(true);
         setError("");
         const res = await fetch(
-          `http://www.omdbapi.com/?apikey=${key_imdb.KEY}&s=${query}`
+          `http://www.omdbapi.com/?apikey=${key_imdb.KEY}&s=${query}`,
+          { signal: controller.signal }
         );
         const data = await res.json();
 
@@ -88,13 +90,19 @@ export default function App() {
         //console.log(data.Search);
       } catch (err) {
         //console.log(err.message);
-        setError(err.message);
+        if (err.name !== "AbortError") {
+          setError(err.message);
+        }
+        setError("");
       } finally {
         setIsLoading(false);
       }
     }
 
     fetchMovies();
+    return () => {
+      controller.abort();
+    };
   }, [query]);
 
   return (
