@@ -43,6 +43,21 @@ const MovieDetails = ({ selectedId, onCloseMovie, onAddWatched, watched }) => {
   };
 
   useEffect(() => {
+    const callBack = (e) => {
+      if (e.code === "Escape") {
+        onCloseMovie();
+        //console.log("📌 Closing by ESC keydown!!");
+      }
+    };
+
+    document.addEventListener("keydown", callBack);
+
+    return () => {
+      document.removeEventListener("keydown", callBack);
+    };
+  }, [onCloseMovie]);
+
+  useEffect(() => {
     const getMovieDetails = async () => {
       setIsLoading(true);
       const res = await fetch(
@@ -63,7 +78,7 @@ const MovieDetails = ({ selectedId, onCloseMovie, onAddWatched, watched }) => {
 
     return () => {
       document.title = "usePopcorn";
-      //console.log(`Clean up effect for movie ${title}`);
+      //console.log(`Clean up effect for 🎬 ${title}`);
     };
   }, [title]);
 

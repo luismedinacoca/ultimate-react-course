@@ -23,7 +23,7 @@ export default function App() {
   const [watched, setWatched] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-  const [query, setQuery] = useState("inception");
+  const [query, setQuery] = useState("");
   const [selectedId, setSelectedId] = useState(null);
   //const tempQuery = "adolescence";
   /*
@@ -59,6 +59,16 @@ export default function App() {
   const handleDeleteWatched = (id) => {
     setWatched((watched) => watched.filter((movie) => movie.imdbID !== id));
   };
+
+  //TODO: ESC key could continue push down and the console.log() will be displayed. Even when movie details is already not shown.
+  // useEffect(() => {
+  //   document.addEventListener("keydown", (e) => {
+  //     if (e.code === "Escape") {
+  //       handleCloseMovie();
+  //       console.log("📌 Closing by ESC keydown!!");
+  //     }
+  //   });
+  // }, []); //Move to MovieDetail component and fix it there
 
   useEffect(() => {
     const controller = new AbortController();
@@ -98,6 +108,11 @@ export default function App() {
         setIsLoading(false);
       }
     }
+
+    /**
+     * In order to close the MovieDetails when user search in the Search component
+     */
+    handleCloseMovie();
 
     fetchMovies();
     return () => {
