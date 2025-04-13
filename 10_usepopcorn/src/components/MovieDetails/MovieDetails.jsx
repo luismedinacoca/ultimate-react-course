@@ -28,6 +28,27 @@ const MovieDetails = ({ selectedId, onCloseMovie, onAddWatched, watched }) => {
     Genre: genre,
   } = movie;
 
+  //Using useEfect:
+  /*
+  const [isTop, setIsTop] = useState(imdbRating > 8);
+  console.log("Is top?", isTop);
+
+  useEffect( () => {
+    setIsTop(imdbRating > 8);  
+  }, [imdbRating]);
+  */
+
+  //Variable
+  /*
+  const isTop = imdbRating > 8;
+  console.log(
+    `${title} has imdbRating ${imdbRating}: Is this movie top? ${isTop}`
+  );
+  */
+
+  /* new useState hook */
+  //const [avgRating, setAvgRating] = useState(0);
+
   const handleAdd = () => {
     const newWatchedMovie = {
       imdbID: selectedId,
@@ -40,10 +61,12 @@ const MovieDetails = ({ selectedId, onCloseMovie, onAddWatched, watched }) => {
     };
     onAddWatched(newWatchedMovie);
     onCloseMovie();
-  };
 
-  //if (imdbRating > 8) [isTop, setIsTop] = useState(true);
-  //if (imdbRating > 8) return <p>Greatest ever!</p>;
+    /*
+    setAvgRating(Number(imdbRating));
+    setAvgRating((avgRating) => (avgRating + userRating) / 2);
+    */
+  };
 
   useEffect(() => {
     const callBack = (e) => {
@@ -105,6 +128,7 @@ const MovieDetails = ({ selectedId, onCloseMovie, onAddWatched, watched }) => {
               <p>
                 <span>⭐️</span> {imdbRating} IMDb rating
               </p>
+              {/* <p>Average Rating: {avgRating}</p> */}
             </div>
           </header>
 
