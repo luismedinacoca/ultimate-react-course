@@ -73,3 +73,18 @@ catch (err) {
   setError("");
 }
 ```
+
+# Section 13 - Lecture 161: The Rules of Hooks in Practice
+
+1. Having a Hook inside a condiitional structure:
+
+<img src='./images/section13/section13lecture161 - Hook inside a conditional.png'>
+First render imdbRating is undefined so the conditional structure is not met. useState(true) for isTop and setIstop is not displayed (appear), then when movie is clicked and imdbRating has a value greater than 9, entering to this conditional structure is met that's when useState(true) for isTop and setIsTop appear.
+
+> It happen to have this error changing the hook sequence/order.
+> <img src='./images/section13/section13-lecture161 - hook error from console.png'>
+
+2. Early return
+   <img src="./images/section13/section13lecture161 - early return.png">
+   Error from console:
+   <img src='./images/section13/section13lecture161 - early return error from console.png'>

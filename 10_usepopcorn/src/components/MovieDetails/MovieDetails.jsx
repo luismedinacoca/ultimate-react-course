@@ -42,6 +42,9 @@ const MovieDetails = ({ selectedId, onCloseMovie, onAddWatched, watched }) => {
     onCloseMovie();
   };
 
+  //if (imdbRating > 8) [isTop, setIsTop] = useState(true);
+  //if (imdbRating > 8) return <p>Greatest ever!</p>;
+
   useEffect(() => {
     const callBack = (e) => {
       if (e.code === "Escape") {
