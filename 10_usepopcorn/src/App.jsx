@@ -15,33 +15,17 @@ import WatchedMoviesList from "./components/WatchedMoviesList/WatchedMoviesList"
 import MovieDetails from "./components/MovieDetails/MovieDetails";
 import { key_imdb } from "./data/data";
 
-//const KEY = "f84fc31d";
-// const KEY = "40abff28";
-
 export default function App() {
   const [movies, setMovies] = useState([]);
-  const [watched, setWatched] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [query, setQuery] = useState("");
   const [selectedId, setSelectedId] = useState(null);
-  //const tempQuery = "adolescence";
-  /*
-  useEffect(() => {
-    console.log("After initial render");
-  }, []);
-
-  useEffect(() => {
-    console.log("After every render");
-  });
-
-  useEffect(() => {
-    console.log("D");
-  }, [query]);
-
-  console.log("");
-  console.log("During render");
-  */
+  // const [watched, setWatched] = useState([]);
+  const [watched, setWatched] = useState(() => {
+    const storedValue = localStorage.getItem("watched");
+    return JSON.parse(storedValue);
+  }); //getting the initial value from localStorage
 
   const handleSelectMovie = (id) => {
     //setSelectedId(id);
@@ -54,21 +38,21 @@ export default function App() {
 
   const handleAddWatched = (movie) => {
     setWatched((watched) => [...watched, movie]);
+
+    //creating local storage saving => without using useEffect depending on watched array.
+    //localStorage.setItem("watched", JSON.stringify([...watched, movie]));
   };
 
   const handleDeleteWatched = (id) => {
     setWatched((watched) => watched.filter((movie) => movie.imdbID !== id));
+
+    // Getting the local storage value => without using useEffect depending on watched array.
+    //JSON.parse(localStorage.getItem("watched"));
   };
 
-  //TODO: ESC key could continue push down and the console.log() will be displayed. Even when movie details is already not shown.
-  // useEffect(() => {
-  //   document.addEventListener("keydown", (e) => {
-  //     if (e.code === "Escape") {
-  //       handleCloseMovie();
-  //       console.log("📌 Closing by ESC keydown!!");
-  //     }
-  //   });
-  // }, []); //Move to MovieDetail component and fix it there
+  useEffect(() => {
+    localStorage.setItem("watched", JSON.stringify(watched));
+  }, [watched]);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -158,10 +142,6 @@ export default function App() {
     </>
   );
 }
-
-// function Loader() {
-//   return <p className="loader">LOADING ....</p>;
-// }
 
 function ErrorMessage({ message }) {
   return (
