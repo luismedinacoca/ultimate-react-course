@@ -132,7 +132,12 @@ so you can see in from the console:
 
 <img src='./images/section13/section13Lecture164 - useState summary.png'>
 
-# Section 13 - Lecture 165:
+# Section 13 - Lecture 165: How NOT to select DOM elements in React
 
 <img src='./images/section13/section13lecture165-SearchComponentInFocus.png'>
 <img src='./images/section13/section13lecture165-SearchComponentInFocus - consoleLog.png'>
+
+# Section 13 - Lecture 166: Introducing Another Hook `useRef`
+
+<img src='./images/section13/section13lecture166-IntroducingAnotherHook-useRef.png'>
+<img src='./images/section13/section13lecture166-IntroducingAnotherHook-useRef-comparisson with useState.png'>
