@@ -131,3 +131,8 @@ so you can see in from the console:
 # Section 13 - Lecture 164: `useState` Summary
 
 <img src='./images/section13/section13Lecture164 - useState summary.png'>
+
+# Section 13 - Lecture 165:
+
+<img src='./images/section13/section13lecture165-SearchComponentInFocus.png'>
+<img src='./images/section13/section13lecture165-SearchComponentInFocus - consoleLog.png'>
