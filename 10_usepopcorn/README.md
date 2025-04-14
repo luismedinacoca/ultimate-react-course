@@ -127,3 +127,7 @@ so you can see in from the console:
 5. using `(avgRating + userRating)/2` in a `callback` function:
    <img src='./images/section13/section13lecture162-avgrating & userRating - callback fn - code.png'>
    <img src='./images/section13/section13lecture162-avgrating & userRating - callback fn - app.png'>
+
+# Section 13 - Lecture 164: `useState` Summary
+
+<img src='./images/section13/section13Lecture164 - useState summary.png'>
