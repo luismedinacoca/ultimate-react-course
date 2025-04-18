@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import { key_imdb } from "../../data/data";
 import StarRating from "../StarRating/StarRating";
 import Loader from "../Loader/Loader";
+import { useKey } from "../../CustomHooks/useKey";
 
 const MovieDetails = ({ selectedId, onCloseMovie, onAddWatched, watched }) => {
   const [movie, setMovie] = useState({});
@@ -75,27 +76,23 @@ const MovieDetails = ({ selectedId, onCloseMovie, onAddWatched, watched }) => {
     };
     onAddWatched(newWatchedMovie);
     onCloseMovie();
-
-    /*
-    setAvgRating(Number(imdbRating));
-    setAvgRating((avgRating) => (avgRating + userRating) / 2);
-    */
   };
 
-  useEffect(() => {
-    const callBack = (e) => {
-      if (e.code === "Escape") {
-        onCloseMovie();
-        //console.log("📌 Closing by ESC keydown!!");
-      }
-    };
+  useKey("Escape", onCloseMovie);
+  // useEffect(() => {
+  //   const callBack = (e) => {
+  //     if (e.code === "Escape") {
+  //       onCloseMovie();
+  //       //console.log("📌 Closing by ESC keydown!!");
+  //     }
+  //   };
 
-    document.addEventListener("keydown", callBack);
+  //   document.addEventListener("keydown", callBack);
 
-    return () => {
-      document.removeEventListener("keydown", callBack);
-    };
-  }, [onCloseMovie]);
+  //   return () => {
+  //     document.removeEventListener("keydown", callBack);
+  //   };
+  // }, [onCloseMovie]);
 
   useEffect(() => {
     const getMovieDetails = async () => {

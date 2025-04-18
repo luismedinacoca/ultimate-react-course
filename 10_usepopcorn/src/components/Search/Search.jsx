@@ -1,18 +1,27 @@
 import { useEffect, useRef } from "react";
+import { useKey } from "../../CustomHooks/useKey";
 
 const Search = ({ query, setQuery }) => {
   const inputEl = useRef(null);
 
+  useKey("Enter", () => {
+    if (document.activeElement === inputEl.current) return;
+    inputEl.current.focus();
+    setQuery("");
+  });
+
+  /*
   useEffect(() => {
     //console.log(">> ", inputEl.current);
     function callback(e) {
       /* Hit enter key when it's already focussed, don't do anything */
-      if (document.activeElement === inputEl.current) return;
+  // if (document.activeElement === inputEl.current) return;
 
-      /*
+    /*
       Hit enter key then search component is selected or on focus
-      */
+    * /
       if (e.code === "Enter") {
+        if (document.activeElement === inputEl.current) return;
         inputEl.current.focus();
         setQuery("");
       }
@@ -23,12 +32,13 @@ const Search = ({ query, setQuery }) => {
 
     return () => document.addEventListener("keydown", callback);
   }, [setQuery]);
+  */
 
-  // useEffect(() => {
-  //   const searchBox = document.querySelector(".search");
-  //   console.log(searchBox);
-  //   searchBox.focus();
-  // }, [query]);
+  useEffect(() => {
+    const searchBox = document.querySelector(".search");
+    console.log(searchBox);
+    searchBox.focus();
+  }, [query]);
 
   return (
     <input
