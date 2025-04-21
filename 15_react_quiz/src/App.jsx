@@ -1,8 +1,8 @@
-import Header from "./Header";
+import Header from "./components/Header";
 import Main from "./components/Main";
 import { useEffect, useReducer } from "react";
-import Loader from "./Loader";
-import Error from "./Error";
+import Loader from "./components/Loader";
+import Error from "./components/Error";
 import StartScreen from "./components/StartScreen";
 import Question from "./components/Question";
 
@@ -11,6 +11,7 @@ const initialState = {
 
   //status: loading, error, ready, active, finished
   status: "loading",
+  index: 0,
 };
 
 const reducer = (state, action) => {
@@ -37,9 +38,11 @@ const reducer = (state, action) => {
 };
 
 const App = () => {
-  //const [state, dispatch] = useReducer(reducer, initialState);
-  const [{ questions, status }, dispatch] = useReducer(reducer, initialState);
-  //const {questions, status } = state;
+  const [{ questions, status, index }, dispatch] = useReducer(
+    reducer,
+    initialState
+  );
+  //const {questions, status, index } = state;
 
   const numQuestions = questions.length;
 
@@ -59,7 +62,7 @@ const App = () => {
         {status === "ready" && (
           <StartScreen numQuestions={numQuestions} dispatch={dispatch} />
         )}
-        {status === "active" && <Question />}
+        {status === "active" && <Question question={questions[index]} />}
       </Main>
     </div>
   );
