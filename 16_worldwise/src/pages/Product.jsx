@@ -1,9 +1,11 @@
 import React from 'react'
+import PageNav from '../components/PageNav'
 
 const Product = () => {
     return (
         <div>
-            <p>Products</p>
+            <PageNav />
+            <h2>Products</h2>
         </div>
     )
 }

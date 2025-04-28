@@ -1,10 +1,14 @@
+import { Link } from "react-router-dom";
 import styles from "./Homepage.module.css";
+import PageNav from "../components/PageNav";
 
 export default function Homepage() {
   return (
-    <main className={styles.homepage}>
+    <div>
+      <PageNav />
       <h1>HomePage</h1>
       {/*
+      <main className={styles.homepage}>
       <section>
         <h1>
           You travel the world.
@@ -17,7 +21,17 @@ export default function Homepage() {
           you have wandered the world.
         </h2>
       </section>
+      </main>
        */}
-    </main>
+
+      {/*
+       <a href="/pricing">Pricing</a>
+      */}
+      {/*
+      <Link to='/pricing' >Pricing</Link>
+      <br />
+      <Link to='/product' >Product</Link>
+      */}
+    </div>
   );
 }
