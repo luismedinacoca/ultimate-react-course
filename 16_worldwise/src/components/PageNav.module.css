@@ -1,0 +1,14 @@
+.nav {
+    background: aqua;
+    color: #141516;
+}
+.nav ul {
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+}
+
+.nav :global(.active) {
+    background: rgb(137, 54, 246);
+    color: rgb(251, 210, 153);
+}

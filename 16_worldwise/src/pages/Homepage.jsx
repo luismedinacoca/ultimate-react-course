@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom";
 import styles from "./Homepage.module.css";
 import PageNav from "../components/PageNav";
+import AppNav from "../components/AppNav";
 
 export default function Homepage() {
   return (
     <div>
       <PageNav />
+      <AppNav />
       <h1>HomePage</h1>
       {/*
       <main className={styles.homepage}>
@@ -32,6 +34,7 @@ export default function Homepage() {
       <br />
       <Link to='/product' >Product</Link>
       */}
+      <Link to="/app">Go to the app</Link>
     </div>
   );
 }
