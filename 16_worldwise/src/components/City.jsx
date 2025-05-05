@@ -1,3 +1,5 @@
+import { useParams } from "react-router-dom";
+
 import styles from "./City.module.css";
 
 const formatDate = (date) =>
@@ -9,6 +11,10 @@ const formatDate = (date) =>
   }).format(new Date(date));
 
 function City() {
+  //const x = useParams(); console.log(x);
+  const { id } = useParams();
+  console.log("Params: ", id);
+
   // TEMP DATA
   const currentCity = {
     cityName: "Lisbon",
@@ -18,7 +24,10 @@ function City() {
   };
 
   const { cityName, emoji, date, notes } = currentCity;
-
+  return (
+    <h1>City {id}</h1>
+  )
+  /*
   return (
     <div className={styles.city}>
       <div className={styles.row}>
@@ -56,6 +65,7 @@ function City() {
       </div>
     </div>
   );
+  */
 }
 
 export default City;
