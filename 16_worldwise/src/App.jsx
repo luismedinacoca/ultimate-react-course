@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom"
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
 import { useState, useEffect } from "react";
 
 import HomePage from './pages/Homepage';
@@ -44,7 +44,10 @@ function App() {
         <Route path="product" element={<Product />} />
         <Route path="login" element={<Login />} />
         <Route path="app" element={<AppLayout />} >
-          <Route index element={<CityList cities={cities} isLoading={isLoading}/>} />
+          {/*<Route index element={<CityList cities={cities} isLoading={isLoading}/>} />*/}
+          {/* //It navigates to Cities as expected however the back button from menu does not work.
+          <Route index element={<Navigate to="cities" />} />*/}
+          <Route index element={<Navigate replace to="cities" />} /> {/* declarative way! */}
           <Route path="cities" element={<CityList cities={cities} isLoading={isLoading}/>} />
           <Route path="cities/:id" element={<City />} />
           <Route path="countries" element={<CountryList cities={cities} isLoading={isLoading}/>} />
