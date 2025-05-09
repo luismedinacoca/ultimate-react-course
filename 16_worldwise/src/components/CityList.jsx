@@ -1,3 +1,4 @@
+import { useCities } from '../contexts/CitiesContext';
 
 import Spinner from './Spinner';
 import CityItem from './CityItem';
@@ -5,8 +6,8 @@ import Message from './Message';
 
 import styles from './CityList.module.css';
 
-const CityList = ({ cities, isLoading }) => {
-  
+const CityList = () => {
+  const { cities, isLoading } = useCities();
   if(isLoading) return <Spinner />
 
   if(!cities.length) return <Message message="Add your first city by clicking on a city on the map"/>
