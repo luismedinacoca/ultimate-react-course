@@ -1,12 +1,92 @@
-# React + Vite
+# Create a fake API
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+1. Having `src/data/questions.json` file:
 
-Currently, two official plugins are available:
+2. Run:
+```bash
+npm i json-server
+```
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+3. Open `package.json` file:
 
-## Expanding the ESLint configuration
+4. Add
+```json
+  "scripts": {
+    "dev": "vite",
+    ...
+    "server": "json-server --watch src/data/questions.json --port 8000"
+  },
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+5. Execute from terminal:
+```bash
+npm run server
+```
+
+Now [http://localhost:8000/questions](http://localhost:8000/questions) is ready to get the data.
+
+# Reducer Hook:
+
+## 1. Call the useReducer hook:
+```js
+const [state, dispatch] = useReducer(reducer, initialState);
+```
+
+1.1 `reducer` is a callback
+1.2 `initialState` is an object with:
+    a. `questions` array which is empty
+    b. `status` = 'Loading'
+
+## 2. Initial State: `initialState`
+```js
+const initialState = {
+  questions: [],
+  status: "loading",
+};
+```
+
+## 3. `reducer` function:
+```js
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "dataReceived":
+      return {
+        ...state,
+        questions: action.payload,
+        status: "ready",
+      };
+    case "dataFailed":
+      return {
+        ...state,
+        status: "error",
+      };
+    default:
+      throw new Error("Action unknown");
+  }
+};
+```
+
+## 4. useEffect:
+```js
+import { useEffect } from 'react';
+
+useEffect(() => {
+  async function loadingQuestions() {
+    try {
+      const res = await fetch("http://localhost:8000/questions");
+      const data = await res.json();
+      // console.log(data);
+      dispatch({ type: "dataReceived", payload: data });
+    } catch (err) {
+      // console.error("Error: " + err);
+      dispatch({ type: "dataFailed" });
+    }
+  }
+
+  cargarPreguntas();
+}, []);
+```
+
+## 5. State Diagram:
+
+<img src="./images/Reducer-loading-error-ready.png">
