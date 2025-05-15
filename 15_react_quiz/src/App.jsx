@@ -10,7 +10,7 @@ import NextButton from "./components/NextButton";
 const initialState = {
   questions: [],
 
-  //status: loading, error, ready, active, finished
+  //status: loading, error, ready, active, answered, next, finished
   status: "loading",
   index: 0, //currentIndex
   answer: null,
