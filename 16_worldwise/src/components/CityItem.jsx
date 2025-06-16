@@ -14,7 +14,7 @@ const CityItem = ({ city }) => {
   //console.log(city);
   const { currentCity } = useCities();
   const { cityName, emoji, date, id, position } = city;
-  console.log(position);
+  //console.log(position);
   return (
     <li>
       <Link className={`${styles.cityItem} ${id=== currentCity.id ? styles["cityItem--active"] : ""}`} to={`${id}?lat=${position.lat}&lng=${position.lng}`}>
