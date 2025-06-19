@@ -1,111 +1,15 @@
 {
   "cities": [
     {
-      "cityName": "Lisbon",
-      "country": "Portugal",
-      "emoji": "🇵🇹",
-      "date": "2027-10-31T15:59:59.138Z",
-      "notes": "My favorite city so far!",
-      "position": {
-        "lat": 38.727881642324164,
-        "lng": -9.140900099907554
-      },
-      "id": "73930385"
-    },
-    {
-      "cityName": "Madrid",
-      "country": "Spain",
-      "emoji": "🇪🇸",
-      "date": "2027-07-15T08:22:53.976Z",
-      "notes": "",
-      "position": {
-        "lat": 40.46635901755316,
-        "lng": -3.7133789062500004
-      },
-      "id": "17806751"
-    },
-    {
-      "cityName": "Berlin",
-      "country": "Germany",
-      "emoji": "🇩🇪",
-      "date": "2027-02-12T09:24:11.863Z",
-      "notes": "Amazing 😃",
-      "position": {
-        "lat": 52.53586782505711,
-        "lng": 13.376933665713324
-      },
-      "id": "98443197"
-    },
-    {
-      "id": "bb88",
-      "cityName": "Almeria",
-      "country": "Spain",
-      "emoji": "🇪🇸",
-      "date": "2025-06-17T10:25:48.172Z",
-      "notes": "Almería rocks",
-      "position": {
-        "lat": 36.83917162753754,
-        "lng": -2.463769912719727
-      }
-    },
-    {
-      "id": "3f7f",
-      "cityName": "Geneve",
-      "country": "Switzerland",
-      "emoji": "🇨🇭",
-      "date": "2025-06-17T10:25:48.172Z",
-      "notes": "Geneve great city",
-      "position": {
-        "lat": 46.20282459311243,
-        "lng": 6.136636734008789
-      }
-    },
-    {
-      "id": "5054",
-      "cityName": "Cusco",
-      "country": "Peru",
-      "emoji": "🇵🇪",
-      "date": "2025-06-17T10:27:56.635Z",
-      "notes": "Salcantay",
-      "position": {
-        "lat": -13.521313198728867,
-        "lng": -71.97650325834553
-      }
-    },
-    {
-      "id": "8b02",
+      "id": "2b83",
       "cityName": "Andorra la Vella",
       "country": "Andorra",
       "emoji": "🇦🇩",
-      "date": "2025-06-17T10:58:19.332Z",
-      "notes": "yey Andorra",
+      "date": "2025-06-19T10:11:27.944Z",
+      "notes": "great",
       "position": {
-        "lat": 42.506780764196904,
-        "lng": 1.5234947204589846
-      }
-    },
-    {
-      "id": "0487",
-      "cityName": "London",
-      "country": "United Kingdom of Great Britain and Northern Ireland (the)",
-      "emoji": "🇬🇧",
-      "date": "2025-06-17T11:34:15.669Z",
-      "notes": "Great britain",
-      "position": {
-        "lat": 51.45400691005982,
-        "lng": -0.0439453125
-      }
-    },
-    {
-      "id": "f0eb",
-      "cityName": "South Dublin Bay Special Area of Conservation",
-      "country": "Ireland",
-      "emoji": "🇮🇪",
-      "date": "2025-06-17T11:35:28.443Z",
-      "notes": "Hi Dublin",
-      "position": {
-        "lat": 53.330872983017066,
-        "lng": -6.1962890625
+        "lat": 42.494377798972465,
+        "lng": 1.5243530273437502
       }
     }
   ]
