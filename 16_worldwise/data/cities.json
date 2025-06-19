@@ -1,15 +1,99 @@
 {
   "cities": [
     {
-      "id": "2b83",
-      "cityName": "Andorra la Vella",
-      "country": "Andorra",
-      "emoji": "🇦🇩",
-      "date": "2025-06-19T10:11:27.944Z",
+      "id": "ac8d",
+      "cityName": "Madrid",
+      "country": "Spain",
+      "emoji": "🇪🇸",
+      "date": "2025-06-19T13:44:40.208Z",
+      "notes": "test",
+      "position": {
+        "lat": 40.38002840251183,
+        "lng": -3.6035156250000004
+      }
+    },
+    {
+      "id": "c05f",
+      "cityName": "Kolo",
+      "country": "Poland",
+      "emoji": "🇵🇱",
+      "date": "2025-06-19T13:44:57.050Z",
+      "notes": "test test",
+      "position": {
+        "lat": 52.20424032262008,
+        "lng": 18.641052246093754
+      }
+    },
+    {
+      "id": "c8dc",
+      "cityName": "Lima",
+      "country": "Peru",
+      "emoji": "🇵🇪",
+      "date": "2025-06-19T13:45:20.769Z",
       "notes": "great",
       "position": {
-        "lat": 42.494377798972465,
-        "lng": 1.5243530273437502
+        "lat": -11.985591791400083,
+        "lng": -77.08625793457031
+      }
+    },
+    {
+      "id": "3495",
+      "cityName": "Dakar",
+      "country": "Senegal",
+      "emoji": "🇸🇳",
+      "date": "2025-06-19T13:46:37.777Z",
+      "notes": "french",
+      "position": {
+        "lat": 14.691209764218868,
+        "lng": -17.446289062500004
+      }
+    },
+    {
+      "id": "c076",
+      "cityName": "Godoy Cruz, Mendoza",
+      "country": "Argentina",
+      "emoji": "🇦🇷",
+      "date": "2025-06-19T13:47:13.255Z",
+      "notes": "I live here!",
+      "position": {
+        "lat": -32.92455477363828,
+        "lng": -68.8480567932129
+      }
+    },
+    {
+      "id": "0b99",
+      "cityName": "Montevideo",
+      "country": "Uruguay",
+      "emoji": "🇺🇾",
+      "date": "2025-06-19T13:48:04.720Z",
+      "notes": "want to visit",
+      "position": {
+        "lat": -34.89494244739731,
+        "lng": -56.1676025390625
+      }
+    },
+    {
+      "id": "d1c5",
+      "cityName": "les Escaldes",
+      "country": "Andorra",
+      "emoji": "🇦🇩",
+      "date": "2025-06-19T13:48:59.097Z",
+      "notes": "linda",
+      "position": {
+        "lat": 42.50450285299051,
+        "lng": 1.5353393554687502
+      }
+    },
+    {
+      "id": "b841",
+      "cityName": "Madrid",
+      "country": "Spain",
+      "emoji": "🇪🇸",
+      "date": "2025-06-19T14:51:06.158Z",
+      "notes": "test001",
+      "position": {
+        "lat": 40.371658891506094,
+        "lng": -3.6007690429687504
       }
     }
   ]
