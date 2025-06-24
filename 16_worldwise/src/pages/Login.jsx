@@ -17,7 +17,7 @@ export default function Login() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(email, password);
+    //console.log(email, password);
     if(email && password) login(email, password);
   }
 

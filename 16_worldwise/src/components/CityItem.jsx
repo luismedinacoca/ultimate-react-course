@@ -16,7 +16,7 @@ const CityItem = ({ city }) => {
   
   const handleClick = (e) => {
     e.preventDefault();
-    console.log('👉🏽 Testing click on handleClick')
+    //console.log('👉🏽 Testing click on handleClick')
     deleteCity(id);
   }
   return (
