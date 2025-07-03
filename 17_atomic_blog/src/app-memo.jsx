@@ -1,4 +1,4 @@
-import { memo, useEffect, useMemo, useState } from "react";
+import { memo, useCallback, useEffect, useMemo, useState } from "react";
 import { faker } from "@faker-js/faker";
 
 function createRandomPost() {
@@ -25,9 +25,9 @@ function App() {
         )
       : posts;
 
-  function handleAddPost(post) {
+  const handleAddPost = useCallback(function handleAddPost(post) {
     setPosts((posts) => [post, ...posts]);
-  }
+  }, []);
 
   function handleClearPosts() {
     setPosts([]);
@@ -66,7 +66,8 @@ function App() {
       <Main posts={searchedPosts} onAddPost={handleAddPost} />
       {/*<Archive onAddPost={handleAddPost} />*/}
       {/*<Archive show={false} />*/}
-      <Archive archiveOptions={archiveOptions} />
+      {/*<Archive archiveOptions={archiveOptions} />*/}
+      <Archive archiveOptions={archiveOptions} onAddPost={handleAddPost} setIsFakeDark={setIsFakeDark}/>
       <Footer />
     </section>
   );
@@ -166,7 +167,7 @@ function List({ posts }) {
 // function Archive({ onAddPost }) {
 // function Archive({ show }) {
 // const Archive = memo(function Archive({ show }) {
-const Archive = memo(function Archive({ archiveOptions }) {
+const Archive = memo(function Archive({ archiveOptions, onAddPost }) {
   // Here we don't need the setter function. We're only using state to store these posts because the callback function passed into useState (which generates the posts) is only called once, on the initial render. So we use this trick as an optimization technique, because if we just used a regular variable, these posts would be re-created on every render. We could also move the posts outside the components, but I wanted to show you this trick 😉
   const [posts] = useState(() =>
     // 💥 WARNING: This might make your computer slow! Try a smaller `length` first
@@ -189,7 +190,7 @@ const Archive = memo(function Archive({ archiveOptions }) {
               <p>
                 <strong>{post.title}:</strong> {post.body}
               </p>
-              {/*<button onClick={() => onAddPost(post)}>Add as new post</button>*/}
+              <button onClick={() => onAddPost(post)}>Add as new post</button> {/*reactivate this button to see the memoization working */}
             </li>
           ))}
         </ul>
