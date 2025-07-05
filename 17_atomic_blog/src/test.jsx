@@ -38,7 +38,7 @@ export default function Test() {
   );*/
   return (
     <Counter>
-      <SlowComponent />
+      {/*<SlowComponent />*/}
     </Counter>
   );
 }
