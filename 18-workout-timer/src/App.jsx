@@ -43,7 +43,7 @@ function App() {
       second: "2-digit",
     }).format(date);
   }
-
+  /*
   useEffect(function () {
     const id = setInterval(function () {
       setTime(formatTime(new Date()));
@@ -51,7 +51,7 @@ function App() {
 
     return () => clearInterval(id);
   }, []);
-
+  */
   return (
     <main>
       <h1>Workout timer</h1>
