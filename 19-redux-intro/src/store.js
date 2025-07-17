@@ -20,7 +20,6 @@ function reducer(state = initialState, action) {
       }
     case "account/requestLoan":
       if (state.loan > 0) return state;
-      //LATER
       return {
         ...state,
         loan: action.payload.amount,
@@ -40,11 +39,15 @@ function reducer(state = initialState, action) {
 }
 
 const store = createStore(reducer);
-console.log("hey Redux!")
+console.log("hey Redux!");
+/*
+console.log("Type: Account/deposit");
 store.dispatch({ type: "account/deposit", payload: 500 });
 console.log(store.getState());
+console.log("Type: Account/withdraw");
 store.dispatch({ type: "account/withdraw", payload: 200 });
 console.log(store.getState());
+console.log("Type: Account/requestLoan");
 store.dispatch({ 
   type: "account/requestLoan", 
   payload: {
@@ -53,5 +56,41 @@ store.dispatch({
   } 
 });
 console.log(store.getState());
+console.log("Type: Account/payLoan");
 store.dispatch({ type: "account/payLoan" });
 console.log(store.getState());
+*/
+
+
+/*********** 1. Deposit US$500 ***********/
+function deposit(amount) {
+  return { type: "account/deposit", payload: amount };
+}
+store.dispatch(deposit(500));
+console.log(store.getState());
+
+
+/*********** 2. Withdraw US$200 ***********/
+function withdraw(amount) {
+  return { type: "account/withdraw", payload: amount };
+}
+store.dispatch(withdraw(200));
+console.log(store.getState());
+
+
+/*********** 3. Request a Loan US$1500 ***********/
+function requestLoan(amount, purpose) {
+  return { type: "account/requestLoan", payload: { amount, purpose } };
+}
+store.dispatch(requestLoan(1500, "Buy a car"));
+console.log(store.getState());
+
+
+
+/*********** 3. Request a Loan US$1500 ***********/
+function payLoan() {
+  return { type: "account/payLoan" };
+}
+store.dispatch(payLoan());
+console.log(store.getState());
+
