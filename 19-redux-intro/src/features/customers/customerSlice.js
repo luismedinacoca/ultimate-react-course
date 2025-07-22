@@ -1,12 +1,8 @@
-
-import store from "../../store.js";
-
 const initialStateCustomer = {
   fullName: "",
   nationalID: "",
   createdAt: "",
 };
-
 
 export default function customerReducer(state = initialStateCustomer, action) {
   switch(action.type) {

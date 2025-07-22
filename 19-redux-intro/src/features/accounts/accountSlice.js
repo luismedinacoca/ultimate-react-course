@@ -1,5 +1,3 @@
-import store from "../../store.js";
-
 const initialStateAccount = {
   balance: 0,
   loan: 0,
