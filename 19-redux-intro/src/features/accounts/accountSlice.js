@@ -13,95 +13,46 @@ const accountSlice = createSlice({
   reducers: {
     deposit(state, action) {
       state.balance = state.balance + action.payload;
+      //  due to  added convertingCurrency action 👀
+      state.isLoading = false;
     },
     withdraw(state, action) {
       state.balance = state.balance - action.payload;
     },
     requestLoan: {
-      //prepare is a function that returns an object with the payload 👈🏽 👀 👀
       prepare(amount, purpose) {
         return { 
           payload: { amount, purpose } 
         };
       },
       reducer(state, action) {
-        if (state.loan > 0) return; //if already have a loan, don't request another one 👀
+        if (state.loan > 0) return;
         state.loan = action.payload.amount;
         state.loanPurpose = action.payload.purpose;
         state.balance = state.balance + action.payload.amount;
       },
     },
-    payLoan(state, action) {
-      /*
-      👉🏽 Try  this commented code first: you will see  payLoan()is not working, due to state.loan = 0 is first one!
-      state.loan = 0;
-      state.balance = state.balance - state.loan;
-      state.loanPurpose = "";
-       */
+    payLoan(state) {
       state.balance = state.balance - state.loan;
       state.loan = 0;
       state.loanPurpose = "";
     },
+    convertingCurrency(state){
+      state.isLoading = true;
+    },
   }
 })
 
-console.log(accountSlice);
-//console.log(requestLoan(15000, "protesis"));
+// ✅ ******* Do not export deposit, because it is a thunk function *******
+// export const { deposit, withdraw, requestLoan, payLoan } = accountSlice.actions;
+export const { withdraw, requestLoan, payLoan } = accountSlice.actions;
 
-export const { deposit, withdraw, requestLoan, payLoan } = accountSlice.actions;
-export default accountSlice.reducer;
-
-/*
-const initialStateAccount = {
-  balance: 0,
-  loan: 0,
-  loanPurpose: "",
-  isLoading: false,
-};
-
-export default function accountReducer(state = initialStateAccount, action) {
-  switch(action.type) {
-    case "account/deposit":
-      return {
-        ...state,
-        balance: state.balance + action.payload,
-        isLoading: false,
-      }
-    case "account/withdraw":
-      return {
-        ...state,
-        balance: state.balance - action.payload,
-      }
-    case "account/requestLoan":
-      if (state.loan > 0) return state;
-      return {
-        ...state,
-        loan: action.payload.amount,
-        loanPurpose: action.payload.purpose,
-        balance:  state.balance + action.payload.amount,
-      }
-    case "account/payLoan":
-      return {
-        ...state,
-        loanPurpose: "",
-        loan: 0,
-        balance: state.balance - state.loan,
-      }
-    case "account/convertingCurrency":
-      return {
-        ...state,
-        isLoading: true,
-      }
-    default:
-      return state;
-  }
-}
-
-/*********** 1. Deposit US$500 *********** /
+/*********** ✅ Thunk function ***********/
 export function deposit(amount, currency) {
+  // Verify the action type is "account/deposit" as expected:
   if(currency === "USD") return { type: "account/deposit", payload: amount };
 
-  //function for thunk middleware:
+  // ✅ function for thunk middleware: ==> Need to add the convertingCurrency action to the state
   return async function(dispatch, getState){
     dispatch({type: "account/convertingCurrency"});
     console.log("getState:",getState());
@@ -115,18 +66,4 @@ export function deposit(amount, currency) {
   }
 }
 
-/*********** 2. Withdraw US$200 *********** 
-export function withdraw(amount) {
-  return { type: "account/withdraw", payload: amount };
-}
-
-/*********** 3. Request a Loan US$1500 *********** /
-export function requestLoan(amount, purpose) {
-  return { type: "account/requestLoan", payload: { amount, purpose } };
-}
-
-
-/*********** 4. Pay back a Loan US$1500 *********** /
-export function payLoan() {
-  return { type: "account/payLoan" };
-}*/
+export default accountSlice.reducer;
