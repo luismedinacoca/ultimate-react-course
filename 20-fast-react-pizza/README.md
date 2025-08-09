@@ -30,7 +30,9 @@ A pizza ordering application built with React and Vite.
 │   │   └── apiRestaurant.js
 │   ├── ui/
 │   │   ├── Error.jsx
-│   │   └── Home.jsx
+│   │   ├── Home.jsx
+│   │   ├── Header.jsx ★
+│   │   └── AppLayout.jsx ★
 │   ├── utils/
 │   │   └── helpers.js
 │   ├── App.jsx
@@ -90,16 +92,26 @@ The main application component has been completely restructured to implement a m
 
 #### Implementation Details:
 ```javascript
-// Previous: Traditional component rendering
-// Current: Router-based navigation system
+// Current: Router-based navigation system with nested layout
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import AppLayout from "./ui/AppLayout";
 
 const router = createBrowserRouter([
-  { path: "/", element: <Home /> },                    // Landing page
-  { path: "/menu", element: <Menu /> },                // Pizza menu display
-  { path: "/cart", element: <Cart /> },                // Shopping cart
-  { path: "/order/new", element: <CreateOrder /> },    // Order creation form
-  { path: "/order/:orderId", element: <Order /> }      // Order details view
+  {
+    element: <AppLayout />,            // Shared layout (Header + CartOverview)
+    children: [
+      { path: "/", element: <Home /> },            // Landing page
+      { path: "/menu", element: <Menu /> },        // Pizza menu display
+      { path: "/cart", element: <Cart /> },        // Shopping cart
+      { path: "/order/new", element: <CreateOrder /> }, // Order creation form
+      { path: "/order/:orderId", element: <Order /> },  // Order details view
+    ],
+  },
 ]);
+
+function App() {
+  return <RouterProvider router={router} />;
+}
 ```
 
 #### Objectives Achieved:
