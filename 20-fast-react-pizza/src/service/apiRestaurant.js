@@ -1,3 +1,4 @@
+//const API_URL = 'https://react-fast-pizza-api.onrender.com/api';
 const API_URL = 'https://react-fast-pizza-api.jonas.io/api';
 
 export async function getMenu() {
