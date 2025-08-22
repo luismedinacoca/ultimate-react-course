@@ -8,11 +8,14 @@ function Menu() {
 
   return (
     <ul>
-      {menu.map( pizza => <MenuItem pizza={pizza} key={pizza.id} />)}
+      {menu.map((pizza) => (
+        <MenuItem pizza={pizza} key={pizza.id} />
+      ))}
     </ul>
   );
 }
 
+// calling the getMenu from apiRestaurant.js
 export async function loader(){
   const menu = await getMenu();
   return menu;
